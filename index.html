@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Chickity-Checklist App</title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+        <style>
+         .list_item {
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: .5%;
+            border-style: solid;
+            border-width: 2px;
+            width: 95%;
+            font-size: 20px;
+            color: black;
+           }
+
+           body {
+            margin: auto;
+            width: 100%;
+            display: block;
+            text-align: left;
+            background-color: palegoldenrod ;
+           }
+
+           .header {
+            display: block;
+            margin: auto;
+            padding-top: .5%;
+            padding-bottom: .5%;
+            padding-left: .5%;
+            width: 100%;
+            background-color: whitesmoke;
+           }
+            .headerText {
+                display: block;
+                width: 100%;
+            }
+
+            .lpbut {
+            display: block;
+            margin: auto;
+            padding-left: 2%;
+            width: 100%;
+            height: 7.5%;
+            font-size: 20px;
+            background-color: whitesmoke;
+            border-style: solid;
+            border-color: palegoldenrod;
+            text-align: left;
+           }
+
+           .lpbut:hover, .createNewBut:hover {
+            background-color: lightgreen;
+           }
+
+           .createNewBut {
+            display: none;
+            text-align: left;
+            width: 25%;
+            margin-left: 1.25%;
+            margin-top: .75%;
+           }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1 id="header" class="header">What do you want to do mama?</h1>
+        </div>
+
+        <div id="landingPageButtons">
+            <button type="button" onclick="createList()" class="lpbut">Create Checklist</button>
+            <button type="button" onclick="generalNote()" class="lpbut">Create General Note</button>
+        </div>
+    
+    
+      <div id="checkList">
+      </div>
+
+        <button class="createNewBut" id="createNewItem" type="button" onclick="createList()">+</button>
+    
+    <script>
+        const htmlList = document.getElementById('checkList');
+        htmlList.style.display ="block";
+        let newItemCounter = 1;
+        let completedItem = 0;
+        let listItem = '';
+        let listText = '';
+        let listItemDiv = '';
+
+        function createList() {
+            document.getElementById('landingPageButtons').setAttribute('hidden', 'true');
+            document.getElementById('header').innerHTML = "New Check List";
+            document.getElementById('header').contentEditable = "true";
+            document.getElementById('createNewItem').style.display = 'block';
+            
+            let listItemDiv = document.createElement('div');
+            listItemDiv.style.display = "block";
+
+            let listItem = document.createElement('input');
+            listItem.setAttribute('type', 'checkbox');
+            listItem.setAttribute('id', newItemCounter);
+            
+            let listText = document.createElement('span');
+            listText.setAttribute('id', 'listItem' + newItemCounter);
+            listText.contentEditable = "true";
+            listText.setAttribute('class', 'list_item');
+            listText.style.backgroundColor = "whitesmoke";
+            listText.style.borderColor = "whitesmoke";
+
+            let deleteListItem = document.createElement('span');
+            deleteListItem.setAttribute('id', 'deleteButton' + newItemCounter);
+            deleteListItem.setAttribute('onclick', 'deleteFunction(event)');
+            deleteListItem.innerHTML = " X ";
+            deleteListItem.style.color = "red";
+            deleteListItem.style.fontSize = "20px";
+            deleteListItem.style.textDecoration = "bold";
+            
+
+            listItem.setAttribute('onclick', "colorChange(event)");
+            
+            htmlList.appendChild(listItemDiv);
+            listItemDiv.appendChild(listItem);
+            listItemDiv.appendChild(listText);
+            listItemDiv.appendChild(deleteListItem);
+            
+            newItemCounter += 1;
+            console.log(newItemCounter);
+
+            listText.focus();
+        }
+
+
+        function colorChange(event) { 
+            let checkBoxID = event.target.id;
+            let cbItem = document.getElementById('listItem' + checkBoxID);
+            let ccItemColor = cbItem.style.backgroundColor; 
+
+            if ((ccItemColor === "whitesmoke")) {
+                cbItem.style.backgroundColor = "darkgray";
+                cbItem.style.borderColor = "darkgray";
+                cbItem.contentEditable = "false";
+            } else {
+                cbItem.style.backgroundColor = "whitesmoke";
+                cbItem.style.borderColor = "whitesmoke";
+                cbItem.contentEditable = "true";
+            }
+        }
+        
+        function deleteFunction(event) {
+            event.target.parentElement.remove();
+        }
+
+        </script>
+    </body>
+</html>
