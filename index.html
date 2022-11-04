@@ -105,6 +105,10 @@
             let listItem = document.createElement('input');
             listItem.setAttribute('type', 'checkbox');
             listItem.setAttribute('id', newItemCounter);
+            listItem.style.width = "25px";
+            listItem.style.height = "25px";
+            listItem.style.marginRight = "1%";
+            listItem.style.verticalAlign = "bottom";
             
             let listText = document.createElement('span');
             listText.setAttribute('id', 'listItem' + newItemCounter);
@@ -116,7 +120,8 @@
             let deleteListItem = document.createElement('span');
             deleteListItem.setAttribute('id', 'deleteButton' + newItemCounter);
             deleteListItem.setAttribute('onclick', 'deleteFunction(event)');
-            deleteListItem.innerHTML = " X ";
+            deleteListItem.style.marginLeft = ".5%";
+            deleteListItem.innerHTML = " X ";   
             deleteListItem.style.color = "red";
             deleteListItem.style.fontSize = "20px";
             deleteListItem.style.textDecoration = "bold";
