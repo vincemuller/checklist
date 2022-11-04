@@ -12,7 +12,7 @@
             margin-top: .5%;
             border-style: solid;
             border-width: 2px;
-            width: 80%;
+            width: 95%;
             font-size: 20px;
             color: black;
            }
@@ -21,32 +21,35 @@
             margin: auto;
             width: 100%;
             display: block;
-            text-align: center;
+            text-align: left;
             background-color: palegoldenrod ;
            }
 
            .header {
             display: block;
-            padding-top: .25%;
-            padding-bottom: .25%;
+            margin: auto;
+            padding-top: .5%;
+            padding-bottom: .5%;
+            padding-left: .5%;
             width: 100%;
             background-color: whitesmoke;
            }
             .headerText {
                 display: block;
+                width: 100%;
             }
 
             .lpbut {
             display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: .5%;
-            width: 50%;
+            margin: auto;
+            padding-left: 2%;
+            width: 100%;
             height: 7.5%;
             font-size: 20px;
             background-color: whitesmoke;
             border-style: solid;
             border-color: palegoldenrod;
+            text-align: left;
            }
 
            .lpbut:hover, .createNewBut:hover {
@@ -55,9 +58,10 @@
 
            .createNewBut {
             display: none;
-            margin: auto;
-            margin-top: 1%;
-            width: 5%;
+            text-align: left;
+            width: 25%;
+            margin-left: 1.25%;
+            margin-top: .75%;
            }
 
         </style>
@@ -96,6 +100,7 @@
             
             let listItemDiv = document.createElement('div');
             listItemDiv.style.display = "block";
+
             let listItem = document.createElement('input');
             listItem.setAttribute('type', 'checkbox');
             listItem.setAttribute('id', newItemCounter);
@@ -104,28 +109,31 @@
             listText.setAttribute('id', 'listItem' + newItemCounter);
             listText.contentEditable = "true";
             listText.setAttribute('class', 'list_item');
-            listText.setAttribute('onclick', 'clearPlaceholder(event)');
             listText.style.backgroundColor = "whitesmoke";
             listText.style.borderColor = "whitesmoke";
-            listText.innerHTML = "ADD ITEM HERE";
+
+            let deleteListItem = document.createElement('span');
+            deleteListItem.setAttribute('id', 'deleteButton' + newItemCounter);
+            deleteListItem.setAttribute('onclick', 'deleteFunction(event)');
+            deleteListItem.innerHTML = " X ";
+            deleteListItem.style.color = "red";
+            deleteListItem.style.fontSize = "20px";
+            deleteListItem.style.textDecoration = "bold";
+            
 
             listItem.setAttribute('onclick', "colorChange(event)");
             
             htmlList.appendChild(listItemDiv);
-            htmlList.appendChild(listItem);
-            htmlList.append(listText);
+            listItemDiv.appendChild(listItem);
+            listItemDiv.appendChild(listText);
+            listItemDiv.appendChild(deleteListItem);
             
             newItemCounter += 1;
             console.log(newItemCounter);
-        }
-    
-        function clearPlaceholder() {
-            let placeholderText = event.target.innerHTML;
 
-            if (placeholderText === 'ADD ITEM HERE') {
-                event.target.innerHTML = "";
-            }
+            listText.focus();
         }
+
 
         function colorChange(event) { 
             let checkBoxID = event.target.id;
@@ -143,6 +151,10 @@
             }
         }
         
+        function deleteFunction(event) {
+            event.target.parentElement.remove();
+        }
+
         </script>
     </body>
 </html>
