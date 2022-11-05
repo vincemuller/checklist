@@ -92,6 +92,7 @@
         let listItem = '';
         let listText = '';
         let listItemDiv = '';
+        let newNote = '';
 
         function createList() {
             document.getElementById('landingPageButtons').setAttribute('hidden', 'true');
@@ -140,6 +141,20 @@
             listText.focus();
         }
 
+        function generalNote() {
+            document.getElementById('landingPageButtons').setAttribute('hidden', 'true');
+            document.getElementById('header').innerHTML = "New Note";
+            document.getElementById('header').contentEditable = "true";
+
+            let newNote = document.createElement('textarea');
+            newNote.setAttribute('rows', '50');
+            newNote.setAttribute('cols', '180');
+            newNote.style.marginLeft = "3%";
+            newNote.style.marginTop = "1.5%";
+            htmlList.appendChild(newNote);
+
+            newNote.focus();
+        }
 
         function colorChange(event) { 
             let checkBoxID = event.target.id;
